@@ -12,8 +12,28 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class LoginController extends ContextInfo {
 	
 	@ResponseBody
-	@RequestMapping("singin")
-	public String loginAuthentication(Model model, HttpServletRequest request){
+	@RequestMapping("/vip")
+	public String VipAuthentication(Model model, HttpServletRequest request){
+		request.getAttribute("");
+		
+		
+		return "";
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping("/member")
+	public String MemberAuthentication(Model model, HttpServletRequest request){
+		request.getAttribute("");
+		
+		
+		return "";
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping("/demo")
+	public String DemnAuthentication(Model model, HttpServletRequest request){
 		request.getAttribute("");
 		
 		

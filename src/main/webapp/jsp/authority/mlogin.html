@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+        <title>登录</title>
+        <link rel="stylesheet" href="frozenui/css/frozen.css">
+        <link rel="stylesheet" href="frozenui/demo.css">
+        <script src="frozenui/lib/zepto.min.js"></script>
+        <script src="frozenui/js/frozen.js"></script>
+    </head>
+    
+    <body ontouchstart>
+        <header class="ui-header ui-header-positive ui-border-b">
+            <!-- <i class="ui-icon-return" onclick="history.back()"></i> --><h1>登录</h1><!-- <button class="ui-btn">回首页</button> -->
+        </header>
+        <section class="ui-container">
+        	<div class="ui-poptips ui-poptips-success" id="msgDiv" style="display: none;">
+			    <div class="ui-poptips-cnt"><i></i><span id="msgText">温馨提示内容</span></div>
+			</div>
+			<!-- <section class="ui-panel" style="margin-bottom: 0px;border-bottom: none;">
+				<div class="ui-form-item ui-border-b" style="height: auto;text-align: center;padding: 0;border-bottom: none;">
+		            <img alt="" src="images/lunpan.jpg" height="105">
+		            <img alt="" src="images/lunpan2.jpg" height="200" width="99%">
+		        </div>
+	        </section> -->
+			<div class="ui-form ui-border-t">
+			    <form action="#">
+			        <div class="ui-form-item ui-border-b">
+			            <label>VIP编号</label>
+			            <input type="text" id="vipId" placeholder="请输入VIP编号" 
+			            onkeyup="if(this.value.length>0){document.getElementById('vipClose').style.display='';} else {document.getElementById('vipClose').style.display='none';}"/>
+			            <a href="javascript:void(0);" id="vipClose"
+			            onclick="document.getElementById('vipId').value='';this.style.display='none';" style="display: none;" class="ui-icon-close"></a>
+			        </div>
+			        <div class="ui-form-item ui-border-b">
+			            <label>打手编号</label>
+			            <input type="text" id="dsId" placeholder="请输入打手编号" 
+			            onkeyup="if(this.value.length>0){document.getElementById('dsClose').style.display='';} else {document.getElementById('dsClose').style.display='none';}"/>
+			            <a href="javascript:void(0);" id="dsClose" 
+			            onclick="document.getElementById('dsId').value='';this.style.display='none';" style="display: none;" class="ui-icon-close"></a>
+			        </div>
+			        <div class="ui-btn-wrap">
+			    		<a class="ui-btn ui-btn-lg ui-btn-primary" id="submitBtn" data-href="index.html">确定</a>
+					</div>
+			    </form>
+			</div>
+        </section>
+        <script>
+        $('#submitBtn').click(function(){
+        	/* $('#msgText').html("请输入VIP编号");
+        	$('#msgDiv').show(); */
+        	var vipId = $("#vipId").val();
+        	var dsId = $("#dsId").val();
+        	if(vipId.length>0 && dsId.length>0) {
+        		ajaxlogin();
+        	}
+        });
+        
+        var ajaxlogin = function() {
+        	location.href= 'mview/mRoulette.html';
+        };
+        </script>
+    </body>
+</html>
