@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.sqhl.shop.mapper.LoginStatusMapper">
+  <resultMap id="BaseResultMap" type="cn.sqhl.shop.vo.LoginStatus">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="SESSIONID" jdbcType="VARCHAR" property="sessionid" />
+    <result column="USERID" jdbcType="VARCHAR" property="userid" />
+    <result column="HMANID" jdbcType="VARCHAR" property="hmanid" />
+    <result column="DEMOID" jdbcType="VARCHAR" property="demoid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, SESSIONID, USERID, HMANID ,DEMOID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from GAME_LOGIN_STATUS
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from GAME_LOGIN_STATUS
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.sqhl.shop.vo.LoginStatus">
+    insert into GAME_LOGIN_STATUS (ID, SESSIONID, USERID, 
+      HMANID,DEMOID)
+    values (#{id,jdbcType=VARCHAR}, #{sessionid,jdbcType=VARCHAR}, #{userid,jdbcType=VARCHAR}, 
+      #{hmanid,jdbcType=VARCHAR},#{demoid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.sqhl.shop.vo.LoginStatus">
+    insert into GAME_LOGIN_STATUS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="sessionid != null">
+        SESSIONID,
+      </if>
+      <if test="userid != null">
+        USERID,
+      </if>
+      <if test="hmanid != null">
+        HMANID,
+      </if>
+      <if test="demoid != null">
+        DEMOID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="sessionid != null">
+        #{sessionid,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="hmanid != null">
+        #{hmanid,jdbcType=VARCHAR},
+      </if>
+      <if test="demoid != null">
+        #{demoid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.sqhl.shop.vo.LoginStatus">
+    update GAME_LOGIN_STATUS
+    <set>
+      <if test="sessionid != null">
+        SESSIONID = #{sessionid,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null">
+        USERID = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="hmanid != null">
+        HMANID = #{hmanid,jdbcType=VARCHAR},
+      </if>
+      <if test="demoid != null">
+        DEMOID = #{demoid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.sqhl.shop.vo.LoginStatus">
+    update GAME_LOGIN_STATUS
+    set SESSIONID = #{sessionid,jdbcType=VARCHAR},
+      USERID = #{userid,jdbcType=VARCHAR},
+      HMANID = #{hmanid,jdbcType=VARCHAR},
+      DEMOID = #{demoid,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

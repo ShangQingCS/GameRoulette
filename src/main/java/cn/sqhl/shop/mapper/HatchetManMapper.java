@@ -1,5 +1,9 @@
 package cn.sqhl.shop.mapper;
 
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
+
 import cn.sqhl.shop.vo.HatchetMan;
 
 public interface HatchetManMapper {
@@ -14,4 +18,6 @@ public interface HatchetManMapper {
     int updateByPrimaryKeySelective(HatchetMan record);
 
     int updateByPrimaryKey(HatchetMan record);
+    
+    HatchetMan queryHatchetMan(@Param("map") Map<String, Object> map);
 }
