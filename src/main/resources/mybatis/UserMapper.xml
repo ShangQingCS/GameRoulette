@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.sqhl.shop.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="cn.sqhl.shop.vo.User">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
+    <result column="NICK_NAME" jdbcType="VARCHAR" property="nickName" />
+    <result column="LOGIN_PWD" jdbcType="VARCHAR" property="loginPwd" />
+    <result column="PAY_PWD" jdbcType="VARCHAR" property="payPwd" />
+    <result column="USER_GRADE" jdbcType="VARCHAR" property="userGrade" />
+    <result column="TIXIAN_STATUS" jdbcType="CHAR" property="tixianStatus" />
+    <result column="OPTION_TIME" jdbcType="TIMESTAMP" property="optionTime" />
+    <result column="USER_STATUS" jdbcType="CHAR" property="userStatus" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="FLAG" jdbcType="CHAR" property="flag" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, USER_NAME, NICK_NAME, LOGIN_PWD, PAY_PWD, USER_GRADE, TIXIAN_STATUS, OPTION_TIME, 
+    USER_STATUS, CREATE_TIME, FLAG
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from GAME_USER
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from GAME_USER
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.sqhl.shop.vo.User">
+    insert into GAME_USER (ID, USER_NAME, NICK_NAME, 
+      LOGIN_PWD, PAY_PWD, USER_GRADE, 
+      TIXIAN_STATUS, OPTION_TIME, USER_STATUS, 
+      CREATE_TIME, FLAG)
+    values (#{id,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, 
+      #{loginPwd,jdbcType=VARCHAR}, #{payPwd,jdbcType=VARCHAR}, #{userGrade,jdbcType=VARCHAR}, 
+      #{tixianStatus,jdbcType=CHAR}, #{optionTime,jdbcType=TIMESTAMP}, #{userStatus,jdbcType=CHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{flag,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.sqhl.shop.vo.User">
+    insert into GAME_USER
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="userName != null">
+        USER_NAME,
+      </if>
+      <if test="nickName != null">
+        NICK_NAME,
+      </if>
+      <if test="loginPwd != null">
+        LOGIN_PWD,
+      </if>
+      <if test="payPwd != null">
+        PAY_PWD,
+      </if>
+      <if test="userGrade != null">
+        USER_GRADE,
+      </if>
+      <if test="tixianStatus != null">
+        TIXIAN_STATUS,
+      </if>
+      <if test="optionTime != null">
+        OPTION_TIME,
+      </if>
+      <if test="userStatus != null">
+        USER_STATUS,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="flag != null">
+        FLAG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null">
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="loginPwd != null">
+        #{loginPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="payPwd != null">
+        #{payPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="userGrade != null">
+        #{userGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="tixianStatus != null">
+        #{tixianStatus,jdbcType=CHAR},
+      </if>
+      <if test="optionTime != null">
+        #{optionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userStatus != null">
+        #{userStatus,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.sqhl.shop.vo.User">
+    update GAME_USER
+    <set>
+      <if test="userName != null">
+        USER_NAME = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null">
+        NICK_NAME = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="loginPwd != null">
+        LOGIN_PWD = #{loginPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="payPwd != null">
+        PAY_PWD = #{payPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="userGrade != null">
+        USER_GRADE = #{userGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="tixianStatus != null">
+        TIXIAN_STATUS = #{tixianStatus,jdbcType=CHAR},
+      </if>
+      <if test="optionTime != null">
+        OPTION_TIME = #{optionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userStatus != null">
+        USER_STATUS = #{userStatus,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flag != null">
+        FLAG = #{flag,jdbcType=CHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.sqhl.shop.vo.User">
+    update GAME_USER
+    set USER_NAME = #{userName,jdbcType=VARCHAR},
+      NICK_NAME = #{nickName,jdbcType=VARCHAR},
+      LOGIN_PWD = #{loginPwd,jdbcType=VARCHAR},
+      PAY_PWD = #{payPwd,jdbcType=VARCHAR},
+      USER_GRADE = #{userGrade,jdbcType=VARCHAR},
+      TIXIAN_STATUS = #{tixianStatus,jdbcType=CHAR},
+      OPTION_TIME = #{optionTime,jdbcType=TIMESTAMP},
+      USER_STATUS = #{userStatus,jdbcType=CHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      FLAG = #{flag,jdbcType=CHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.sqhl.shop.mapper.BrecordMapper">
+  <resultMap id="BaseResultMap" type="cn.sqhl.shop.vo.Brecord">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="ATTR" jdbcType="VARCHAR" property="attr" />
+    <result column="ATTRVAL" jdbcType="VARCHAR" property="attrval" />
+    <result column="FACE_VALUE" jdbcType="VARCHAR" property="faceValue" />
+    <result column="BEFOREID" jdbcType="VARCHAR" property="beforeid" />
+    <result column="NOWID" jdbcType="VARCHAR" property="nowid" />
+    <result column="USERID" jdbcType="VARCHAR" property="userid" />
+    <result column="SHARES" jdbcType="DECIMAL" property="shares" />
+    <result column="BATCH_ID" jdbcType="VARCHAR" property="batchId" />
+    <result column="HATCHET_MAN" jdbcType="VARCHAR" property="hatchetMan" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, ATTR, ATTRVAL, FACE_VALUE, BEFOREID, NOWID, USERID, SHARES, BATCH_ID, HATCHET_MAN, 
+    CREATE_TIME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from GAME_ROULETTE_BRECORD
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from GAME_ROULETTE_BRECORD
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.sqhl.shop.vo.Brecord">
+    insert into GAME_ROULETTE_BRECORD (ID, ATTR, ATTRVAL, 
+      FACE_VALUE, BEFOREID, NOWID, 
+      USERID, SHARES, BATCH_ID, 
+      HATCHET_MAN, CREATE_TIME)
+    values (#{id,jdbcType=VARCHAR}, #{attr,jdbcType=VARCHAR}, #{attrval,jdbcType=VARCHAR}, 
+      #{faceValue,jdbcType=VARCHAR}, #{beforeid,jdbcType=VARCHAR}, #{nowid,jdbcType=VARCHAR}, 
+      #{userid,jdbcType=VARCHAR}, #{shares,jdbcType=DECIMAL}, #{batchId,jdbcType=VARCHAR}, 
+      #{hatchetMan,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.sqhl.shop.vo.Brecord">
+    insert into GAME_ROULETTE_BRECORD
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="attr != null">
+        ATTR,
+      </if>
+      <if test="attrval != null">
+        ATTRVAL,
+      </if>
+      <if test="faceValue != null">
+        FACE_VALUE,
+      </if>
+      <if test="beforeid != null">
+        BEFOREID,
+      </if>
+      <if test="nowid != null">
+        NOWID,
+      </if>
+      <if test="userid != null">
+        USERID,
+      </if>
+      <if test="shares != null">
+        SHARES,
+      </if>
+      <if test="batchId != null">
+        BATCH_ID,
+      </if>
+      <if test="hatchetMan != null">
+        HATCHET_MAN,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="attr != null">
+        #{attr,jdbcType=VARCHAR},
+      </if>
+      <if test="attrval != null">
+        #{attrval,jdbcType=VARCHAR},
+      </if>
+      <if test="faceValue != null">
+        #{faceValue,jdbcType=VARCHAR},
+      </if>
+      <if test="beforeid != null">
+        #{beforeid,jdbcType=VARCHAR},
+      </if>
+      <if test="nowid != null">
+        #{nowid,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="shares != null">
+        #{shares,jdbcType=DECIMAL},
+      </if>
+      <if test="batchId != null">
+        #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="hatchetMan != null">
+        #{hatchetMan,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.sqhl.shop.vo.Brecord">
+    update GAME_ROULETTE_BRECORD
+    <set>
+      <if test="attr != null">
+        ATTR = #{attr,jdbcType=VARCHAR},
+      </if>
+      <if test="attrval != null">
+        ATTRVAL = #{attrval,jdbcType=VARCHAR},
+      </if>
+      <if test="faceValue != null">
+        FACE_VALUE = #{faceValue,jdbcType=VARCHAR},
+      </if>
+      <if test="beforeid != null">
+        BEFOREID = #{beforeid,jdbcType=VARCHAR},
+      </if>
+      <if test="nowid != null">
+        NOWID = #{nowid,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null">
+        USERID = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="shares != null">
+        SHARES = #{shares,jdbcType=DECIMAL},
+      </if>
+      <if test="batchId != null">
+        BATCH_ID = #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="hatchetMan != null">
+        HATCHET_MAN = #{hatchetMan,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.sqhl.shop.vo.Brecord">
+    update GAME_ROULETTE_BRECORD
+    set ATTR = #{attr,jdbcType=VARCHAR},
+      ATTRVAL = #{attrval,jdbcType=VARCHAR},
+      FACE_VALUE = #{faceValue,jdbcType=VARCHAR},
+      BEFOREID = #{beforeid,jdbcType=VARCHAR},
+      NOWID = #{nowid,jdbcType=VARCHAR},
+      USERID = #{userid,jdbcType=VARCHAR},
+      SHARES = #{shares,jdbcType=DECIMAL},
+      BATCH_ID = #{batchId,jdbcType=VARCHAR},
+      HATCHET_MAN = #{hatchetMan,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

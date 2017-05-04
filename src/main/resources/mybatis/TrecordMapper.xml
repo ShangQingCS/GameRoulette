@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.sqhl.shop.mapper.TrecordMapper">
+  <resultMap id="BaseResultMap" type="cn.sqhl.shop.vo.Trecord">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="USERID" jdbcType="VARCHAR" property="userid" />
+    <result column="NUMB" jdbcType="VARCHAR" property="numb" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="BATCH_ID" jdbcType="VARCHAR" property="batchId" />
+    <result column="HATCHET_MAN" jdbcType="VARCHAR" property="hatchetMan" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, USERID, NUMB, CREATE_TIME, BATCH_ID, HATCHET_MAN
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from GAME_ROULETTE_TRECORD
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from GAME_ROULETTE_TRECORD
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.sqhl.shop.vo.Trecord">
+    insert into GAME_ROULETTE_TRECORD (ID, USERID, NUMB, 
+      CREATE_TIME, BATCH_ID, HATCHET_MAN
+      )
+    values (#{id,jdbcType=VARCHAR}, #{userid,jdbcType=VARCHAR}, #{numb,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{batchId,jdbcType=VARCHAR}, #{hatchetMan,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.sqhl.shop.vo.Trecord">
+    insert into GAME_ROULETTE_TRECORD
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="userid != null">
+        USERID,
+      </if>
+      <if test="numb != null">
+        NUMB,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="batchId != null">
+        BATCH_ID,
+      </if>
+      <if test="hatchetMan != null">
+        HATCHET_MAN,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="numb != null">
+        #{numb,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="batchId != null">
+        #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="hatchetMan != null">
+        #{hatchetMan,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.sqhl.shop.vo.Trecord">
+    update GAME_ROULETTE_TRECORD
+    <set>
+      <if test="userid != null">
+        USERID = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="numb != null">
+        NUMB = #{numb,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="batchId != null">
+        BATCH_ID = #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="hatchetMan != null">
+        HATCHET_MAN = #{hatchetMan,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.sqhl.shop.vo.Trecord">
+    update GAME_ROULETTE_TRECORD
+    set USERID = #{userid,jdbcType=VARCHAR},
+      NUMB = #{numb,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      BATCH_ID = #{batchId,jdbcType=VARCHAR},
+      HATCHET_MAN = #{hatchetMan,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("Login")
-public class LoginController extends ContextInfo {
+public class LoginController {
 	
 	@ResponseBody
 	@RequestMapping("/vip")
