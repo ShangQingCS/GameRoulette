@@ -2,18 +2,21 @@ package cn.sqhl.shop.service.impl;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
 import org.apache.commons.lang.StringUtils;
 
+import cn.sqhl.shop.mapper.BatchGenerationMapper;
 import cn.sqhl.shop.mapper.GameDemoMapper;
 import cn.sqhl.shop.mapper.HatchetManMapper;
 import cn.sqhl.shop.mapper.LoginStatusMapper;
 import cn.sqhl.shop.mapper.UserMapper;
 import cn.sqhl.shop.service.LoginService;
 import cn.sqhl.shop.utils.MD5Util;
+import cn.sqhl.shop.vo.BatchGeneration;
 import cn.sqhl.shop.vo.GameDemo;
 import cn.sqhl.shop.vo.HatchetMan;
 import cn.sqhl.shop.vo.LoginStatus;
@@ -33,6 +36,9 @@ public class LoginServiceImpl implements LoginService{
 	
 	@Autowired
 	private LoginStatusMapper loginStatusMapper;
+	
+	@Autowired
+	private BatchGenerationMapper batchGenerationMapper;
 	
 	@Override
 	public User AuthenticationUser(String username, String password) {
@@ -69,7 +75,7 @@ public class LoginServiceImpl implements LoginService{
 		Map map1=new HashMap();
 		map1.put("username", username);
 		Map map2=new HashMap();
-		map2.put("vipusername", vipusername);
+		map2.put("username", vipusername);
 		HatchetMan hman=hatchetManMapper.queryHatchetMan(map1);
 		User user=userMapper.queryUser(map2);
 		
@@ -81,23 +87,29 @@ public class LoginServiceImpl implements LoginService{
 		}
 	}
 
+	@Transactional
 	@Override
 	public LoginStatus updateSession(String username, String hname,String demoname, String sessionid) {
 		Map map=new HashMap();
 		LoginStatus newstatus=new LoginStatus();
 		
+		BatchGeneration bg=new BatchGeneration();
+		
 		if(StringUtils.isNotEmpty(username)){
 			map.put("userid", username);
 			newstatus.setUserid(username);
+			bg.setUserid(username);
 		}
 		if(StringUtils.isNotEmpty(hname)){
 			map.put("hmanid",hname);
 			newstatus.setHmanid(hname);
+			bg.setHatchetMan(hname);
 		}
 		
 		if(StringUtils.isNotEmpty(demoname)){
 			map.put("demoid",demoname);
 			newstatus.setDemoid(demoname);
+			bg.setUserid(username);
 		}
 		//在记录中查找是否有对应的记录
 		LoginStatus lstatus=loginStatusMapper.queryStatus(map);
@@ -115,10 +127,19 @@ public class LoginServiceImpl implements LoginService{
 			i=loginStatusMapper.insertSelective(newstatus);
 		}
 		
-		if(i>0){
+		int j=1;
+		if(StringUtils.isNotEmpty(demoname)){
+			j=updateBatchGenaration(bg);
+		}else if(StringUtils.isNotEmpty(username) && StringUtils.isNotEmpty(hname)){
+			j=updateBatchGenaration(bg);
+		}
+		
+		
+		
+		if(i>0 && j >0){
 			return loginStatusMapper.queryStatus(map);
 		}else{
-			return null;
+			throw new RuntimeException("tansaction 异常 数据回滚");
 		}
 	}
 	
@@ -126,6 +147,17 @@ public class LoginServiceImpl implements LoginService{
 		Map map=new HashMap();
 		map.put("sessionid",sessionid);
 		return loginStatusMapper.queryStatus(map);
+	}
+	
+	public int updateBatchGenaration(BatchGeneration bg){
+		BatchGeneration bgs=batchGenerationMapper.queryBatchGenr(bg);
+		if(bgs!=null){
+			bgs.setBatchId(UUID.randomUUID().toString());
+			return batchGenerationMapper.updateByPrimaryKeySelective(bgs);
+		}else{
+			bg.setBatchId(UUID.randomUUID().toString());
+			return batchGenerationMapper.insertSelective(bgs);
+		}
 	}
 
 }

@@ -70,8 +70,12 @@
 		<table tableName="game_login_status" domainObjectName="LoginStatus"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
-			selectByExampleQueryId="false"></table>-->
+			selectByExampleQueryId="false">
 		<table tableName="game_demo" domainObjectName="GameDemo"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false"></table></table>-->
+		<table tableName="game_roulette_batchgeneration" domainObjectName="BatchGeneration"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false"></table>

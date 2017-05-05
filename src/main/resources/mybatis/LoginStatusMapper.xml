@@ -7,9 +7,10 @@
     <result column="USERID" jdbcType="VARCHAR" property="userid" />
     <result column="HMANID" jdbcType="VARCHAR" property="hmanid" />
     <result column="DEMOID" jdbcType="VARCHAR" property="demoid" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" typeHandler="cn.sqhl.shop.core.DateTypeHandler"/>
   </resultMap>
   <sql id="Base_Column_List">
-    ID, SESSIONID, USERID, HMANID ,DEMOID
+    ID, SESSIONID, USERID, HMANID ,DEMOID,updatetime
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -79,6 +80,9 @@
       <if test="demoid != null">
         DEMOID = #{demoid,jdbcType=VARCHAR},
       </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=VARCHAR},
+      </if>
     </set>
     where ID = #{id,jdbcType=VARCHAR}
   </update>
@@ -87,7 +91,28 @@
     set SESSIONID = #{sessionid,jdbcType=VARCHAR},
       USERID = #{userid,jdbcType=VARCHAR},
       HMANID = #{hmanid,jdbcType=VARCHAR},
-      DEMOID = #{demoid,jdbcType=VARCHAR}
+      DEMOID = #{demoid,jdbcType=VARCHAR},
+      updatetime = #{updatetime,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=VARCHAR}
   </update>
+  
+  
+  <select id="queryStatus" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from GAME_LOGIN_STATUS
+    where 1=1
+    <if test="map.sessionid != null">
+    	and SESSIONID=#{map.sessionid,jdbcType=VARCHAR}
+    </if>
+    <if test="map.userid != null">
+    	and USERID=#{map.userid,jdbcType=VARCHAR}
+    </if>
+    <if test="map.hmanid != null">
+    	and HMANID=#{map.hmanid,jdbcType=VARCHAR}
+    </if>
+    <if test="map.demoid != null">
+    	and DEMOID=#{map.demoid,jdbcType=VARCHAR}
+    </if>
+  </select>
 </mapper>

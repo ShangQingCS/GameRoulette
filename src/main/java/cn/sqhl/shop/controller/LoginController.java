@@ -19,7 +19,7 @@ import cn.sqhl.shop.vo.LoginStatus;
 import cn.sqhl.shop.vo.User;
 
 @Controller
-@RequestMapping("Login")
+@RequestMapping("/login")
 public class LoginController {
 	
 	@Autowired

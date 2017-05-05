@@ -10,6 +10,8 @@ public class LoginStatus {
     private String hmanid;
     
     private String demoid;
+    
+    private String updatetime;
 
     public String getId() {
         return id;
@@ -49,5 +51,13 @@ public class LoginStatus {
 
 	public void setDemoid(String demoid) {
 		this.demoid = demoid;
+	}
+
+	public String getUpdatetime() {
+		return updatetime;
+	}
+
+	public void setUpdatetime(String updatetime) {
+		this.updatetime = updatetime;
 	}
 }
