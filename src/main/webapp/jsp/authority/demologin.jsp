@@ -1,17 +1,18 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<!doctype html>
+<!DOCTYPE html>
+<% String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort(); %>
 <html>
-<head>
+    <head>
   	<jsp:include page="/include/common.jsp"></jsp:include>
   	<meta charset="utf-8">
   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-  	<title>${adminTitle }</title>
+  	<title>演示版 login</title>
   	<meta name="description" content="">
   	<meta name="keywords" content="index">
   	<meta name="viewport" content="width=device-width, initial-scale=1">
   	<meta name="renderer" content="webkit">
   	<meta http-equiv="Cache-Control" content="no-siteapp" />
-  	<link rel="stylesheet" href="${path }/AmazeUI-2.7.2/assets/css/login/app.css">
+  	<link rel="stylesheet" href="<%=basePath %>/AmazeUI-2.7.2/assets/css/login/app.css">
   	<style type="text/css">
   		.login-font {
   			font-size: 20px;
@@ -19,14 +20,8 @@
   		}
   	</style>
 	<script type="text/javascript">
-	$(function(){
-		
-	});
 	
 	function login(){
-		window.location.href = "${path}/view/roulette.jsp";
-		return;
-		
 		var userid = document.getElementById("email").value;
 		var pwd = document.getElementById("password").value;
 		//var verifyCode = document.getElementById("verifyCode").value;
@@ -34,21 +29,16 @@
 		if(userid=="" || pwd==""/*  || verifyCode=="" */ ){
 			msg.innerHTML = "用户名密码不能为空";
 		}else{
-			msg.innerHTML = "&nbsp;";
-			var data = "&user.UId="+userid+"&user.UPwd="+pwd/* +"&verifyCode="+verifyCode */;
-			$.ajax({
-				type: "POST",
-				url: "login.action",
-				data: data,
-				dataType: "json",
-				success: function(json) {
-					if(json.success) {
-						window.location.href = "${path}/view/lunpan.jsp";
-					} else {
-						msg.innerText = json.msg;
-					}
-				},error: function(json) {
-					msg.innerHTML = "登录验证异常";
+			//msg.innerHTML = "&nbsp;";
+			//var data = "&dname="+userid+"&pwd="+pwd+"authenticationType=0"/* +"&verifyCode="+verifyCode */;
+			var data = { dname:userid, pwd:pwd,authenticationType:0};
+			$.post("<%=basePath %>/login/validate.do",data,function (json){
+				//json=eval('(' + json + ')');
+				json=JSON.parse(json);
+				if(json.result == 1) {
+					window.location.href = "<%=basePath %>"+json.url;
+				} else {
+					msg.innerText = json.message;
 				}
 			});
 		}
@@ -83,6 +73,6 @@
 		</div>
 	</div>
 </div>
-<script src="${path }/AmazeUI-2.7.2/assets/js/app.js"></script>
+<script src="<%=basePath %>/AmazeUI-2.7.2/assets/js/app.js"></script>
 </body>
 </html>

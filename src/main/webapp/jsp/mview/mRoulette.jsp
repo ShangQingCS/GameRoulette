@@ -1,14 +1,16 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
+    	<jsp:include page="${Path }/include/common.jsp"></jsp:include>
         <meta charset="utf-8">
         <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
         <meta name="format-detection" content="telephone=no">
         <title></title>
-        <link rel="stylesheet" href="../frozenui/css/frozen.css">
-        <link rel="stylesheet" href="../frozenui/demo.css">
-        <script src="../frozenui/lib/zepto.min.js"></script>
-        <script src="../frozenui/js/frozen.js"></script>
+        <link rel="stylesheet" href="${Path }/frozenui/css/frozen.css">
+        <link rel="stylesheet" href="${Path }/frozenui/demo.css">
+        <script src="${Path }/frozenui/lib/zepto.min.js"></script>
+        <script src="${Path }/frozenui/js/frozen.js"></script>
 		<style>
 			.small {
 				background:red;
@@ -53,6 +55,7 @@
 				font-size: 14px;
 			}
 		</style>
+		
     </head>
     
     <body>

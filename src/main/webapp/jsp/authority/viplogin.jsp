@@ -1,13 +1,14 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <!DOCTYPE html>
+<% String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort(); %>
 <html>
 <head>
 	<meta charset="utf-8">
-  	<title>登录</title>
+  	<title>vip login</title>
   	<meta name="renderer" content="webkit">
   	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  	<link rel="stylesheet" href="js/layui-v1.0.9_rls/layui/css/layui.css"  media="all">
+  	<link rel="stylesheet" href="<%=basePath %>/js/layui-v1.0.9_rls/layui/css/layui.css"  media="all">
 	<style type="text/css">
 		.main {
 			margin:auto auto;
@@ -30,7 +31,7 @@
 	</style>
 </head>
 <body>
-<div class="main" style="background: url('images/timg1.jpg')no-repeat;background-size:100% 100%;">
+<div class="main" style="background: url('<%=basePath%>/images/timg1.jpg')no-repeat;background-size:100% 100%;">
 	<form class="layui-form layui-form-pane" action="">
 	  <div class="layui-form-item">
 	    <label class="layui-form-label">用户名</label>
@@ -57,7 +58,8 @@
 	  </div>
 	</form>
 </div>
-<script src="js/layui-v1.0.9_rls/layui/layui.js" charset="utf-8"></script>
+<script src="<%=basePath %>/js/jquery-1.8.0.min.js" charset="utf-8"></script>
+<script src="<%=basePath %>/js/layui-v1.0.9_rls/layui/layui.js" charset="utf-8"></script>
 <script>
 layui.use(['form'], function() {
 	var form = layui.form() ,layer = layui.layer;
@@ -77,8 +79,33 @@ layui.use(['form'], function() {
 		/* layer.alert(JSON.stringify(data.field), {
 			title: '最终的提交信息'
     	}) */
-    	window.location.href="vipview/search.jsp";
-    	return false;
+    	
+		var userid = data.form[0].value;
+		var pwd = data.form[1].value;
+		//var verifyCode = document.getElementById("verifyCode").value;
+		//var msg = document.getElementByName("div_msg");
+		if(userid=="" || pwd==""/*  || verifyCode=="" */ ){
+			layer.alert(JSON.stringify("用户名密码不能为空"), {
+				title: '提示'
+			});
+		}else{
+			//msg.innerHTML = "&nbsp;";
+			var data = { uname:userid, pwd:pwd,authenticationType:1};
+			//"&uname="+userid+"&pwd="+pwd+"authenticationType=1";/* +"&verifyCode="+verifyCode */
+			
+			$.post("<%=basePath %>/login/validate.do",data,function (json){
+				//json=eval('(' + json + ')');
+				json=JSON.parse(json);
+				if(json.result == 1) {
+					window.location.href = "<%=basePath %>"+json.url;
+				} else {
+					layer.alert(JSON.stringify(json.message), {
+						title: '提示'
+				    });
+				}
+			});
+			return false;
+		}
 	});
 });
 </script>

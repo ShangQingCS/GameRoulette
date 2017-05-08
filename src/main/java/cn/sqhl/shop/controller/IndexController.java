@@ -19,14 +19,14 @@ public class IndexController {
 	
 	@RequestMapping("/view")
 	public String View(Model model, HttpServletRequest request){
-		return "/jsp/view/roulette";
+		return "/jsp/mview/mRoulette";
 	}
 	
 	
 	
 	@RequestMapping("/demo")
 	public String Demn(Model model, HttpServletRequest request){
-		return "/jsp/mview/mRoulette";
+		return "/jsp/view/roulette";
 	}
 	
 	

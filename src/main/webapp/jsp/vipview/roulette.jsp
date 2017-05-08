@@ -2,9 +2,9 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<jsp:include page="/include/common.jsp"></jsp:include>
+<jsp:include page="${Path }/include/common.jsp"></jsp:include>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title></title>
+<title>vip show</title>
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 <style type="text/css">
 .am-badge {
@@ -301,13 +301,13 @@ body {
 					<span style="font-size:30px;font-weight: bold;color: white;">基　码:</span><span style="font-size:30px;font-weight: bold;color: white;">　<span>10</span>　</span>
 				</td>
 				<td align="center">
-					<a href="#"><img alt="" src="${path }/images/money-10.png"/></a>
+					<a href="#"><img alt="" src="${Path }/images/money-10.png"/></a>
 					&nbsp;&nbsp;&nbsp;
-					<a href="#"><img alt="" src="${path }/images/money-20.png"/></a>
+					<a href="#"><img alt="" src="${Path }/images/money-20.png"/></a>
 					&nbsp;&nbsp;&nbsp;
-					<a href="#"><img alt="" src="${path }/images/money-30.png"/></a>
+					<a href="#"><img alt="" src="${Path }/images/money-30.png"/></a>
 					&nbsp;&nbsp;&nbsp;
-					<a href="#"><img alt="" src="${path }/images/money-50.png"/></a>
+					<a href="#"><img alt="" src="${Path }/images/money-50.png"/></a>
 					&nbsp;&nbsp;&nbsp;
 					<select style="height: 50px; width: 50px;">
 						<option>100</option>

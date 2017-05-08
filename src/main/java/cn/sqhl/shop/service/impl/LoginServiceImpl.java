@@ -109,7 +109,7 @@ public class LoginServiceImpl implements LoginService{
 		if(StringUtils.isNotEmpty(demoname)){
 			map.put("demoid",demoname);
 			newstatus.setDemoid(demoname);
-			bg.setUserid(username);
+			bg.setUserid(demoname);
 		}
 		//在记录中查找是否有对应的记录
 		LoginStatus lstatus=loginStatusMapper.queryStatus(map);
@@ -156,7 +156,7 @@ public class LoginServiceImpl implements LoginService{
 			return batchGenerationMapper.updateByPrimaryKeySelective(bgs);
 		}else{
 			bg.setBatchId(UUID.randomUUID().toString());
-			return batchGenerationMapper.insertSelective(bgs);
+			return batchGenerationMapper.insertSelective(bg);
 		}
 	}
 

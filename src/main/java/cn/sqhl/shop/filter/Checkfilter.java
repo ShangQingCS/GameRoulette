@@ -52,7 +52,7 @@ public class Checkfilter extends OncePerRequestFilter {
 		// TODO Auto-generated method stub
 		String path = request.getRequestURI();
 		HttpSession session = request.getSession();
-
+		try{
 		if (urllist.contains(path)) {// 是否符合check 内容
 			LoginStatus lstatus = loginService.querySession(session.getId());
 			if (lstatus != null) {
@@ -86,16 +86,16 @@ public class Checkfilter extends OncePerRequestFilter {
 					} else if (path.equals("/index/view.do")) {// 有打手权限
 
 						if (StringUtils.isNotEmpty(uid) && StringUtils.isNotEmpty(hid)) {
-							response.sendRedirect("/login/view.do");// 返回没有权限
-						} else {
 							chain.doFilter(request, response);
+						} else {
+							response.sendRedirect("/login/view.do");// 返回没有权限
 						}
 					} else if (path.equals("/index/demo.do")) {
 
 						if (StringUtils.isEmpty(uid) && StringUtils.isEmpty(hid) && StringUtils.isNotEmpty(did)) {// 有登陆
-							response.sendRedirect("/login/demo.do");// 返回没有权限
-						} else {
 							chain.doFilter(request, response);
+						} else {
+							response.sendRedirect("/login/demo.do");// 返回没有权限
 						}
 					} else {
 						response.sendRedirect("/login/vip.do");// 返回没有权限
@@ -108,7 +108,9 @@ public class Checkfilter extends OncePerRequestFilter {
 		} else {
 			chain.doFilter(request, response);
 		}
-
+		}catch(Exception e){
+			response.sendRedirect("/login/vip.do");// 返回没有权限
+		}
 	}
 
 }
