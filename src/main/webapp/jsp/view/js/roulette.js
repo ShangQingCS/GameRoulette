@@ -1,6 +1,3 @@
-$(function(){
-});
-
 var key = 1;
 var index = 0;
 
@@ -95,30 +92,37 @@ $("#saveBtn").click(function(){
 	$(".castSmall").text("￥0");
 	$(".castBig").text("￥0");
 	$(".castIn").text("￥0");
-	var data = {"lotteryNumber":number,"betAmount":isbase};
+	var basic="lotteryNumber="+number+"&betAmount="+isbase;
+	var sign=sign(basic);
+	var data={"lotteryNumber":number,"betAmount":isbase,"sign":sign,"sign_type":"MD5","sign_charset":"UTF-8"}
 	$.ajax({
-		url :path_ +"/view/roulette!queryRoulette.action",
+		url :path_ +"/idnex/getnext.do",
 		type : 'POST',
 		data : data,
 		dataType: "json",
 		success : function(data) {
-			$(data.rouletteList).each(function(index){
-				var rouletteType = data.rouletteList[index];
-				if(rouletteType.attr =="ROW_INFO"){
-					if(rouletteType.attrval == 1){
-						$(".castSmall").text("￥"+rouletteType.faceValue);
-					}else if(rouletteType.attrval == 2){
-						$(".castBig").text("￥"+rouletteType.faceValue);
-					}else if(rouletteType.attrval == 3){
-						$(".castIn").text("￥"+rouletteType.faceValue);
+			data=getSignVeryfy(data);
+			if(data){
+				$(data).each(function(index){
+					var rouletteType = data[index];
+					if(rouletteType.attr =="ROW_INFO"){
+						if(rouletteType.attrval == 1){
+							$(".castSmall").text("￥"+rouletteType.faceValue);
+						}else if(rouletteType.attrval == 2){
+							$(".castBig").text("￥"+rouletteType.faceValue);
+						}else if(rouletteType.attrval == 3){
+							$(".castIn").text("￥"+rouletteType.faceValue);
+						}
 					}
-				}
-				if(rouletteType.sumShares != null){
-					$(".totalProfit").text("￥"+rouletteType.sumShares);
-				}else{
-					$(".totalProfit").text("￥0");
-				}
-			});
+					if(rouletteType.sumShares != null){
+						$(".totalProfit").text("￥"+rouletteType.sumShares);
+					}else{
+						$(".totalProfit").text("￥0");
+					}
+				});
+			}else{
+				alert("网络故障~请重新尝试");
+			}
 		}
 	});
 	$("#checkNumber").val("");

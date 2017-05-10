@@ -79,14 +79,17 @@ public class IndexController {
 			Map requestmap = getRequestMap(request);
 			
 			SecurityConfig.sign_type="MD5";
-			
+//			Map map1=requestmap;
 			Map map1=SecurityCore.paraFilter(requestmap);
-			//SecurityConfig.key=request.getSession().getId();
+//			SecurityConfig.key=request.getSession().getId();
 			LoginStatus ls=loginService.getSession(map1);
-			if(ls==null){
+//			LoginStatus ls=new LoginStatus();
+			if(ls!=null){
 				if(StringUtils.isNotEmpty(ls.getSessionid())){
 					SecurityConfig.key=ls.getSessionid();
+//					SecurityConfig.key="595D0F41C567A59FD148F24418F5CB8A";// for test
 				}
+//				if (true){
 				if (SecurityCore.getSignVeryfy(requestmap)) {
 					String lotteryNumber=map1.get("lotteryNumber")==null?"":map1.get("lotteryNumber")+"";
 					String betAmount=map1.get("betAmount")==null?"":map1.get("betAmount")+"";
@@ -97,10 +100,13 @@ public class IndexController {
 						map.put("lotteryNumber",lotteryNumber);
 					}if(StringUtils.isNotEmpty(betAmount)){
 						map.put("betAmount",betAmount);
-					}if(StringUtils.isNotEmpty(userid)){
+					}
+//					map.put("userid","1");
+//					map.put("hatchet","1");
+					if(StringUtils.isNotEmpty(userid)){
 						map.put("userid",userid);
 					}if(StringUtils.isNotEmpty(hmanid)){
-						map.put("hmanid",hmanid);
+						map.put("hatchet",hmanid);
 					}
 					if(map.size()>0){
 						List rouletteList= rouletteService.queryRouletteList(map);

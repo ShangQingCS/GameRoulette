@@ -329,5 +329,6 @@ body {
 		</table>
 	</div>
 </body>
+<script type="text/javascript" src="${path}/js/md5_utf8.js"></script>
 <script type="text/javascript" src="${path}/view/js/roulette.js"></script>
 </html>
