@@ -209,9 +209,8 @@ function getSignVeryfy(json){
 	var res;
 	if(data){
 		res="data="+JSON.stringify(data)+"&message="+json.message+"&result="+json.result+"&ver="+json.ver;
-		res="&message="+json.message+"&result="+json.result+"&ver="+json.ver;
 	}else{
-		return null;
+		res="&message="+json.message+"&result="+json.result+"&ver="+json.ver;
 	}
 		if(json){
 			var sign=json.sign;
