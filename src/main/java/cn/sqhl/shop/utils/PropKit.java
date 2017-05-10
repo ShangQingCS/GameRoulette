@@ -9,8 +9,8 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class PropKit {
 	
-	private static Prop prop = null;
-	private static final ConcurrentHashMap<String, Prop> map = new ConcurrentHashMap<String, Prop>();
+	private static PropertiesHelper prop = null;
+	private static final ConcurrentHashMap<String, PropertiesHelper> map = new ConcurrentHashMap<String, PropertiesHelper>();
 	
 	private PropKit() {}
 	
@@ -18,7 +18,7 @@ public class PropKit {
 	 * Using the properties file. It will loading the properties file if not loading.
 	 * @see #use(String, String)
 	 */
-	public static Prop use(String fileName) {
+	public static PropertiesHelper use(String fileName) {
 		return use(fileName, "utf-8");
 	}
 	
@@ -39,10 +39,10 @@ public class PropKit {
 	 * @param fileName the properties file's name in classpath or the sub directory of classpath
 	 * @param encoding the encoding
 	 */
-	public static Prop use(String fileName, String encoding) {
-		Prop result = map.get(fileName);
+	public static PropertiesHelper use(String fileName, String encoding) {
+		PropertiesHelper result = map.get(fileName);
 		if (result == null) {
-			result = new Prop(fileName, encoding);
+			result = new PropertiesHelper(fileName, encoding);
 			map.put(fileName, result);
 			if (PropKit.prop == null)
 				PropKit.prop = result;
@@ -54,7 +54,7 @@ public class PropKit {
 	 * Using the properties file bye File object. It will loading the properties file if not loading.
 	 * @see #use(File, String)
 	 */
-	public static Prop use(File file) {
+	public static PropertiesHelper use(File file) {
 		return use(file, "utf-8");
 	}
 	
@@ -68,10 +68,10 @@ public class PropKit {
 	 * @param file the properties File object
 	 * @param encoding the encoding
 	 */
-	public static Prop use(File file, String encoding) {
-		Prop result = map.get(file.getName());
+	public static PropertiesHelper use(File file, String encoding) {
+		PropertiesHelper result = map.get(file.getName());
 		if (result == null) {
-			result = new Prop(file, encoding);
+			result = new PropertiesHelper(file, encoding);
 			map.put(file.getName(), result);
 			if (PropKit.prop == null)
 				PropKit.prop = result;
@@ -79,8 +79,8 @@ public class PropKit {
 		return result;
 	}
 	
-	public static Prop useless(String fileName) {
-		Prop previous = map.remove(fileName);
+	public static PropertiesHelper useless(String fileName) {
+		PropertiesHelper previous = map.remove(fileName);
 		if (PropKit.prop == previous)
 			PropKit.prop = null;
 		return previous;
@@ -91,13 +91,13 @@ public class PropKit {
 		map.clear();
 	}
 	
-	public static Prop getProp() {
+	public static PropertiesHelper getProp() {
 		if (prop == null)
 			throw new IllegalStateException("Load propties file by invoking PropKit.use(String fileName) method first.");
 		return prop;
 	}
 	
-	public static Prop getProp(String fileName) {
+	public static PropertiesHelper getProp(String fileName) {
 		return map.get(fileName);
 	}
 	

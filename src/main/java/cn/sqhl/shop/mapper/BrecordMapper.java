@@ -1,5 +1,10 @@
 package cn.sqhl.shop.mapper;
 
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
+
 import cn.sqhl.shop.vo.Brecord;
 
 public interface BrecordMapper {
@@ -14,4 +19,10 @@ public interface BrecordMapper {
     int updateByPrimaryKeySelective(Brecord record);
 
     int updateByPrimaryKey(Brecord record);
+    
+    List<Map<String,Object>> selectByBatchId(String batchId);
+    
+    Double selectSumShares(String batchId);
+    
+    void selectNextBatList(@Param(value="map") Map<String,Object> map);
 }

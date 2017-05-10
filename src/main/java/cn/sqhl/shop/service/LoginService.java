@@ -1,5 +1,7 @@
 package cn.sqhl.shop.service;
 
+import java.util.Map;
+
 import cn.sqhl.shop.vo.GameDemo;
 import cn.sqhl.shop.vo.HatchetMan;
 import cn.sqhl.shop.vo.LoginStatus;
@@ -11,4 +13,5 @@ public interface LoginService {
 	public HatchetMan AuthenticationHatchetMan(String username,String vipusername);
 	public LoginStatus updateSession(String username, String vipusername,String demoname, String sessionid);
 	public LoginStatus querySession(String sessionid);
+	public LoginStatus getSession(Map map);
 }

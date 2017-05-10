@@ -7,6 +7,9 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.alibaba.fastjson.JSONObject;
+
 import org.apache.commons.lang.StringUtils;
 
 import cn.sqhl.shop.mapper.BatchGenerationMapper;
@@ -158,6 +161,25 @@ public class LoginServiceImpl implements LoginService{
 			bg.setBatchId(UUID.randomUUID().toString());
 			return batchGenerationMapper.insertSelective(bg);
 		}
+	}
+
+	@Override
+	public LoginStatus getSession(Map map) {
+		String uname=map.get("uname")==null?"":map.get("uname")+"";
+		String dname=map.get("dname")==null?"":map.get("dname")+"";
+		String hname=map.get("hname")==null?"":map.get("hname")+"";
+		Map map1=new HashMap();
+		if(StringUtils.isNotEmpty(uname)){
+			map1.put("uname", uname);
+		}
+		if(StringUtils.isNotEmpty(dname)){
+			map1.put("dname", dname);	
+		}
+		if(StringUtils.isNotEmpty(hname)){
+			map1.put("hname", hname);
+		}
+		LoginStatus ls=loginStatusMapper.queryStatus(map1);
+		return ls;
 	}
 
 }

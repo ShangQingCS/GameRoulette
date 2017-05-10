@@ -161,4 +161,29 @@
       CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}
     where ID = #{id,jdbcType=VARCHAR}
   </update>
+  
+  
+  <!-- 查询最新预测数据 -->
+  <select id="selectByBatchId" parameterType="java.lang.String" resultMap="BaseResultMap">
+  select
+  <include refid="Base_Column_List" />
+  from GAME_ROULETTE_BRECORD
+  where BATCH_ID=#{batchId,jdbcType=VARCHAR}
+  and NOWID is null
+  </select>
+  <!-- 计算盈亏 -->
+  <select id="selectSumShares" parameterType="java.lang.String" resultType="java.lang.Double">
+  	select sum(shares) from game_roulette_brecord where BATCH_ID=#{batchId,jdbcType=VARCHAR}
+  </select>
+  <!-- 调用算法 -->
+  <select id="selectNextBatList" statementType="CALLABLE" parameterType="java.util.Map">
+  	call next_Bet_list(
+  						#{map.lotteryNumber,jdbcType=VARCHAR,mode=IN},
+  						#{map.betAmount,jdbcType=VARCHAR,mode=IN},
+  						#{map.userid,jdbcType=VARCHAR,mode=IN},
+  						#{map.hatchet,jdbcType=VARCHAR,mode=IN},
+  						#{map.BatchId,jdbcType=VARCHAR,mode=OUT},
+  						#{map.winLose,jdbcType=VARCHAR,mode=OUT},
+  						#{map.stake,jdbcType=VARCHAR,mode=OUT})
+  </select>
 </mapper>
