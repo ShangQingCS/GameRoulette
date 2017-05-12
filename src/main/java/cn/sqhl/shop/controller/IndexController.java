@@ -4,8 +4,8 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.ResourceBundle;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -51,22 +51,24 @@ public class IndexController {
 	LoginService loginService;
 	
 	@RequestMapping("/vip")
-	public String Vip(Model model, HttpServletRequest request){
+	public String Vip(Model model, HttpServletRequest request,HttpServletResponse response){
+		response.setHeader("SET-COOKIE", "JSESSIONID=" + request.getSession().getId() + ";");
 		return "/jsp/vipview/roulette";
 	}
 	
 	
 	
 	@RequestMapping("/view")
-	public String View(Model model, HttpServletRequest request){
-		
+	public String View(Model model, HttpServletRequest request,HttpServletResponse response){
+		response.setHeader("SET-COOKIE", "JSESSIONID=" + request.getSession().getId() + ";");
 		return "/jsp/mview/mRoulette";
 	}
 	
 	
 	
 	@RequestMapping("/demo")
-	public String Demn(Model model, HttpServletRequest request){
+	public String Demn(Model model, HttpServletRequest request,HttpServletResponse response){
+		response.setHeader("SET-COOKIE", "JSESSIONID=" + request.getSession().getId() + ";");
 		return "/jsp/view/roulette";
 	}
 	
@@ -82,7 +84,8 @@ public class IndexController {
 //			Map map1=requestmap;
 			Map map1=SecurityCore.paraFilter(requestmap);
 //			SecurityConfig.key=request.getSession().getId();
-			LoginStatus ls=loginService.getSession(map1);
+			LoginStatus ls=loginService.querySession(request.getSession().getId());
+			
 //			LoginStatus ls=new LoginStatus();
 			if(ls!=null){
 				if(StringUtils.isNotEmpty(ls.getSessionid())){
@@ -93,6 +96,7 @@ public class IndexController {
 				if (SecurityCore.getSignVeryfy(requestmap)) {
 					String lotteryNumber=map1.get("lotteryNumber")==null?"":map1.get("lotteryNumber")+"";
 					String betAmount=map1.get("betAmount")==null?"":map1.get("betAmount")+"";
+					String type=map1.get("type")==null?"":map1.get("type")+"";
 					String userid=ls.getUserid()==null?ls.getDemoid():ls.getUserid();
 					String hmanid=ls.getHmanid()==null?"":ls.getHmanid();
 					Map map=new HashMap();
@@ -107,6 +111,10 @@ public class IndexController {
 						map.put("userid",userid);
 					}if(StringUtils.isNotEmpty(hmanid)){
 						map.put("hatchet",hmanid);
+					}if(StringUtils.isNotEmpty(type)){
+						if(type.equals("1") || type.equals("0")){
+							map.put("hatchet","0");
+						}
 					}
 					if(map.size()>0){
 						List rouletteList= rouletteService.queryRouletteList(map);
@@ -141,7 +149,6 @@ public class IndexController {
 		basemap.put("data", data);
 
 		Map signvalue = SecurityCore.buildRequestPara(basemap);
-
 		jreturn.putAll(signvalue);
 		return jreturn;
 
@@ -154,7 +161,11 @@ public class IndexController {
 		logger.log(INFO,"request Decrypt info :  "+locationsJSONString);
 		//JSONObject requestString=JSONObject.parseObject(locationsJSONString);
 		if(locationsJSONString!=null && locationsJSONString.length() >0){
-			return FormatUtils.convertJsonStrToMap(locationsJSONString);
+			if(locationsJSONString.indexOf("&") > 0){
+				return FormatUtils.convertURLStrToMap(locationsJSONString);
+			}else{
+				return FormatUtils.convertJsonStrToMap(locationsJSONString);
+			}
 		}else{
 			return null;
 		}

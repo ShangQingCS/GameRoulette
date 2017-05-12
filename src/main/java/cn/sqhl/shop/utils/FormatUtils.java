@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -241,6 +242,18 @@ public class FormatUtils {
 				new TypeReference<Map<String, Object>>() {
 				});
 
+		return map;
+	}
+	
+	public static Map<String, Object> convertURLStrToMap(String url) {
+		Map map= new HashMap();
+		String [] array=url.split("&");
+		for(int i=0;i<array.length;i++){
+			if(array[i].indexOf("=") > 0){
+				String [] kv=array[i].split("=");
+				map.put(kv[0], kv[1]);
+			}
+		}
 		return map;
 	}
 

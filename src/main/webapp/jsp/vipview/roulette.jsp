@@ -1,10 +1,14 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<% String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort(); %>
 <html>
 <head>
-<jsp:include page="${Path }/include/common.jsp"></jsp:include>
+<script type="text/javascript">
+	var path_="<%=basePath%>";
+</script>
+<jsp:include page="/include/common.jsp"></jsp:include>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>vip show</title>
+<title></title>
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 <style type="text/css">
 .am-badge {
@@ -93,13 +97,14 @@ body {
 <%-- <body style="background: url('${path}/images/timg1.jpg')no-repeat;background-size:100% 100%;"> --%>
 <body>
 	<div class="main" style="height: 90px; margin-top: 20px;">
-		<table align="center" width="100%">
+		<table align="center" width="100%" border="0">
 			<tr>
 				<td>
 					<div style="width: 770px;overflow: hidden;margin-left: 70px;">
-						<table class="selected">
+						<table class="selected" id="selected">
+							<thead> 
 							<tr>
-								<th>1</th>
+								<!-- <th>1</th>
 								<th>2</th>
 								<th>3</th>
 								<th>4</th>
@@ -119,11 +124,18 @@ body {
 								<th>18</th>
 								<th>19</th>
 								<th>20</th>
-								<th>21</th>
+								<th>21</th>  -->
 							</tr>
+							</thead>
+							<tbody>
 							<tr>
-								<td><span class="am-badge am-badge-danger am-round am-badge-selected">3</span></td>
+							<!-- <td><span class="am-badge am-badge-danger am-round am-badge-selected">3</span></td>
 								<td><span class="am-badge am-badge-black am-round am-badge-selected">6</span></td>
+								<td><span class="am-badge am-badge-black am-round am-badge-selected">27</span></td>
+								<td><span class="am-badge am-badge-danger am-round am-badge-selected">34</span></td>
+								<td><span class="am-badge am-badge-black am-round am-badge-selected">10</span></td>
+								<td><span >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td>
+								<td><span class="am-badge am-badge-black am-round am-badge-selected">15</span></td>
 								<td><span class="am-badge am-badge-success am-round am-badge-selected">0</span></td>
 								<td><span class="am-badge am-badge-success am-round am-badge-selected">0</span></td>
 								<td><span class="am-badge am-badge-success am-round am-badge-selected">0</span></td>
@@ -137,13 +149,9 @@ body {
 								<td><span class="am-badge am-badge-success am-round am-badge-selected">0</span></td>
 								<td><span class="am-badge am-badge-success am-round am-badge-selected">0</span></td>
 								<td><span class="am-badge am-badge-success am-round am-badge-selected">0</span></td>
-								<td><span class="am-badge am-badge-success am-round am-badge-selected">0</span></td>
-								<td><span class="am-badge am-badge-success am-round am-badge-selected">0</span></td>
-								<td><span class="am-badge am-badge-success am-round am-badge-selected">0</span></td>
-								<td><span class="am-badge am-badge-success am-round am-badge-selected">0</span></td>
-								<td><span class="am-badge am-badge-success am-round am-badge-selected">0</span></td>
-								<td><span class="am-badge am-badge-success am-round am-badge-selected">0</span></td>
+								<td><span class="am-badge am-badge-success am-round am-badge-selected">0</span></td>  -->
 							</tr>
+							</tbody>
 						</table>
 					</div>
 				</td>
@@ -151,9 +159,9 @@ body {
 			<tr>
 				<td align="right">
 					<div style="margin-top: 5px;">
-						<button type="button" class="am-btn am-btn-danger am-round"><i class="am-icon-cog"></i> 重选</button>
-						<button type="button" class="am-btn am-btn-danger am-round"><i class="am-icon-cog"></i> 清空</button>
-						<button type="button" class="am-btn am-btn-danger am-round" style="float: left;margin-left: 70px;"><i class="am-icon-cog"></i> 退出</button>
+						<button type="button" id="gravityBtn" class="am-btn am-btn-danger am-round"><i class="am-icon-cog"></i> 重选</button>
+						<button type="button" id="emptyBtn" class="am-btn am-btn-danger am-round"><i class="am-icon-cog"></i> 清空</button>
+						<button type="button" id="signOutBtn" class="am-btn am-btn-danger am-round" style="float: left;margin-left: 70px;"><i class="am-icon-cog"></i> 退出</button>
 					</div>
 				</td>
 			</tr>
@@ -182,73 +190,73 @@ body {
 				<td>
 					<table class="zreo">
 						<tr>
-							<td style="margin-right: 10px;"><span class="am-badge am-badge-zreo am-round am-badge-singe">0</span></td>
+							<td style="margin-right: 10px;"><a href="#" onclick='checkNumber(0)'><span class="am-badge am-badge-zreo am-round am-badge-singe">0</span></a></td>
 						</tr>
 					</table>
 				</td>
 				<td>
 					<table class="big">
 						<tr>
-							<td><span class="am-badge am-badge-danger am-round am-badge-singe">3</span></td>
-							<td><span class="am-badge am-badge-black am-round am-badge-singe">6</span></td>
-							<td><span class="am-badge am-badge-danger am-round am-badge-singe">9</span></td>
-							<td><span class="am-badge am-badge-danger am-badge-danger am-round">12</span></td>
+							<td><a href="#" onclick='checkNumber(3)'><span class="am-badge am-badge-danger am-round am-badge-singe">3</span></a></td>
+							<td><a href="#" onclick='checkNumber(6)'><span class="am-badge am-badge-black am-round am-badge-singe">6</span></a></td>
+							<td><a href="#" onclick='checkNumber(9)'><span class="am-badge am-badge-danger am-round am-badge-singe">9</span></a></td>
+							<td><a href="#" onclick='checkNumber(12)'><span class="am-badge am-badge-danger am-badge-danger am-round">12</span></a></td>
 						</tr>
 						<tr>
-							<td><span class="am-badge am-badge-black am-round am-badge-singe">2</span></td>
-							<td><span class="am-badge am-badge-danger am-round am-badge-singe">5</span></td>
-							<td><span class="am-badge am-badge-black am-round am-badge-singe">8</span></td>
-							<td><span class="am-badge am-badge-black am-round">11</span></td>
+							<td><a href="#" onclick='checkNumber(2)'><span class="am-badge am-badge-black am-round am-badge-singe">2</span></a></td>
+							<td><a href="#" onclick='checkNumber(5)'><span class="am-badge am-badge-danger am-round am-badge-singe">5</span></a></td>
+							<td><a href="#" onclick='checkNumber(8)'><span class="am-badge am-badge-black am-round am-badge-singe">8</span></a></td>
+							<td><a href="#" onclick='checkNumber(11)'><span class="am-badge am-badge-black am-round">11</span></a></td>
 						</tr>
 						<tr>
-							<td><span class="am-badge am-badge-danger am-round am-badge-singe">1</span></td>
-							<td><span class="am-badge am-badge-black am-round am-badge-singe">4</span></td>
-							<td><span class="am-badge am-badge-black am-round am-badge-singe">7</span></td>
-							<td><span class="am-badge am-badge-black am-round">10</span></td>
+							<td><a href="#" onclick='checkNumber(1)'><span class="am-badge am-badge-danger am-round am-badge-singe">1</span></a></td>
+							<td><a href="#" onclick='checkNumber(4)'><span class="am-badge am-badge-black am-round am-badge-singe">4</span></a></td>
+							<td><a href="#" onclick='checkNumber(7)'><span class="am-badge am-badge-danger am-round am-badge-singe">7</span></a></td>
+							<td><a href="#" onclick='checkNumber(10)'><span class="am-badge am-badge-black am-round">10</span></a></td>
 						</tr>
 					</table>
 				</td>
 				<td>
 					<table class="middle">
 						<tr>
-							<td><span class="am-badge am-badge-black am-round">15</span></td>
-							<td><span class="am-badge am-badge-danger am-round">18</span></td>
-							<td><span class="am-badge am-badge-danger am-round">21</span></td>
-							<td><span class="am-badge am-badge-black am-round">24</span></td>
+							<td><a href="#" onclick='checkNumber(15)'><span class="am-badge am-badge-black am-round">15</span></a></td>
+							<td><a href="#" onclick='checkNumber(18)'><span class="am-badge am-badge-danger am-round">18</span></a></td>
+							<td><a href="#" onclick='checkNumber(21)'><span class="am-badge am-badge-danger am-round">21</span></a></td>
+							<td><a href="#" onclick='checkNumber(24)'><span class="am-badge am-badge-black am-round">24</span></a></td>
 						</tr>
 						<tr>
-							<td><span class="am-badge am-badge-danger am-round">14</span></td>
-							<td><span class="am-badge am-badge-black am-round">17</span></td>
-							<td><span class="am-badge am-badge-black am-round">20</span></td>
-							<td><span class="am-badge am-badge-danger am-round">23</span></td>
+							<td><a href="#" onclick='checkNumber(14)'><span class="am-badge am-badge-danger am-round">14</span></a></td>
+							<td><a href="#" onclick='checkNumber(17)'><span class="am-badge am-badge-black am-round">17</span></a></td>
+							<td><a href="#" onclick='checkNumber(20)'><span class="am-badge am-badge-black am-round">20</span></a></td>
+							<td><a href="#" onclick='checkNumber(23)'><span class="am-badge am-badge-danger am-round">23</span></a></td>
 						</tr>
 						<tr>
-							<td><span class="am-badge am-badge-danger am-round">16</span></td>
-							<td><span class="am-badge am-badge-danger am-round">19</span></td>
-							<td><span class="am-badge am-badge-black am-round">22</span></td>
-							<td><span class="am-badge am-badge-danger am-round">25</span></td>
+							<td><a href="#" onclick='checkNumber(13)'><span class="am-badge am-badge-black am-round">13</span></a></td>
+							<td><a href="#" onclick='checkNumber(16)'><span class="am-badge am-badge-danger am-round">16</span></a></td>
+							<td><a href="#" onclick='checkNumber(19)'><span class="am-badge am-badge-black am-round">19</span></a></td>
+							<td><a href="#" onclick='checkNumber(22)'><span class="am-badge am-badge-black am-round">22</span></a></td>
 						</tr>
 					</table>
 				</td>
 				<td>
 					<table class="small">
 						<tr>
-							<td><span class="am-badge am-badge-danger am-round">27</span></td>
-							<td><span class="am-badge am-badge-danger am-round">30</span></td>
-							<td><span class="am-badge am-badge-black am-round">33</span></td>
-							<td><span class="am-badge am-badge-danger am-round">36</span></td>
+							<td><a href="#" onclick='checkNumber(17)'><span class="am-badge am-badge-danger am-round">27</span></a></td>
+							<td><a href="#" onclick='checkNumber(30)'><span class="am-badge am-badge-danger am-round">30</span></a></td>
+							<td><a href="#" onclick='checkNumber(33)'><span class="am-badge am-badge-black am-round">33</span></a></td>
+							<td><a href="#" onclick='checkNumber(36)'><span class="am-badge am-badge-danger am-round">36</span></a></td>
 						</tr>
 						<tr>
-							<td><span class="am-badge am-badge-black am-round">26</span></td>
-							<td><span class="am-badge am-badge-black am-round">29</span></td>
-							<td><span class="am-badge am-badge-danger am-round">32</span></td>
-							<td><span class="am-badge am-badge-black am-round">35</span></td>
+							<td><a href="#" onclick='checkNumber(26)'><span class="am-badge am-badge-black am-round">26</span></a></td>
+							<td><a href="#" onclick='checkNumber(29)'><span class="am-badge am-badge-black am-round">29</span></a></td>
+							<td><a href="#" onclick='checkNumber(32)'><span class="am-badge am-badge-danger am-round">32</span></a></td>
+							<td><a href="#" onclick='checkNumber(35)'><span class="am-badge am-badge-black am-round">35</span></a></td>
 						</tr>
 						<tr>
-							<td><span class="am-badge am-badge-black am-round">25</span></td>
-							<td><span class="am-badge am-badge-black am-round">28</span></td>
-							<td><span class="am-badge am-badge-black am-round">31</span></td>
-							<td><span class="am-badge am-badge-danger am-round">34</span></td>
+							<td><a href="#" onclick='checkNumber(25)'><span class="am-badge am-badge-danger am-round">25</span></a></td>
+							<td><a href="#" onclick='checkNumber(28)'><span class="am-badge am-badge-danger am-round">28</span></a></td>
+							<td><a href="#" onclick='checkNumber(31)'><span class="am-badge am-badge-black am-round">31</span></a></td>
+							<td><a href="#" onclick='checkNumber(34)'><span class="am-badge am-badge-danger am-round">34</span></a></td>
 						</tr>
 					</table>
 				</td>
@@ -272,21 +280,21 @@ body {
 				<td>
 					<table width="100%" border="1" bordercolor="white">
 						<tr>
-							<td align="center" height="50"><span style="font-size:40px;font-weight: bold;color: white;">￥450</span></td>
+							<td align="center" height="50"><span class="castSmall" style="font-size:40px;font-weight: bold;color: white;"></span></td>
 						</tr>
 					</table>
 				</td>
 				<td>
 					<table width="100%" border="1" bordercolor="white">
 						<tr>
-							<td align="center" height="50"><span style="font-size:40px;font-weight: bold;color: white;">￥450</span></td>
+							<td align="center" height="50"><span class="castBig" style="font-size:40px;font-weight: bold;color: white;"></span></td>
 						</tr>
 					</table>
 				</td>
 				<td>
 					<table width="100%" border="1" bordercolor="white">
 						<tr>
-							<td align="center" height="50"><span style="font-size:40px;font-weight: bold;color: white;">￥450</span></td>
+							<td align="center" height="50"><span class="castIn" style="font-size:40px;font-weight: bold;color: white;"></span></td>
 						</tr>
 					</table>
 				</td>
@@ -295,32 +303,36 @@ body {
 		</table>
 		<table align="center" class="jima" style="margin-top: 50px;width:845px;" border="0" bordercolor="white">
 			<tr>
-				<td width="200" valign="top">
-					<span style="font-size:30px;font-weight: bold;color: white;">总获利:</span><span style="font-size:30px;font-weight: bold;color: white;">￥450</span>
+				<td width="255" valign="top">
+					<span style="font-size:30px;font-weight: bold;color: white;">总获利:</span><span class="totalProfit" style="font-size:30px;font-weight: bold;color: white;"></span>
 					<br/><br/>
-					<span style="font-size:30px;font-weight: bold;color: white;">基　码:</span><span style="font-size:30px;font-weight: bold;color: white;">　<span>10</span>　</span>
+					<span style="font-size:30px;font-weight: bold;color: white;">基　码:</span><span class="isBase" style="font-size:30px;font-weight: bold;color: white;"><span></span></span>
+					<input type="hidden" id="isBase"/>
+					<input type="hidden" id="checkNumber"/>
 				</td>
 				<td align="center">
-					<a href="#"><img alt="" src="${Path }/images/money-10.png"/></a>
+					<a href="#" onclick='codeBase(10)'><img alt="" src="${path }/images/money-10.png"/></a>
 					&nbsp;&nbsp;&nbsp;
-					<a href="#"><img alt="" src="${Path }/images/money-20.png"/></a>
+					<a href="#" onclick='codeBase(20)'><img alt="" src="${path }/images/money-20.png"/></a>
 					&nbsp;&nbsp;&nbsp;
-					<a href="#"><img alt="" src="${Path }/images/money-30.png"/></a>
+					<a href="#" onclick='codeBase(30)'><img alt="" src="${path }/images/money-30.png"/></a>
 					&nbsp;&nbsp;&nbsp;
-					<a href="#"><img alt="" src="${Path }/images/money-50.png"/></a>
+					<a href="#" onclick='codeBase(50)'><img alt="" src="${path }/images/money-50.png"/></a>
 					&nbsp;&nbsp;&nbsp;
-					<select style="height: 50px; width: 50px;">
+					<!-- <select style="height: 50px; width: 50px;">
 						<option>100</option>
 						<option>200</option>
 						<option>300</option>
-					</select>
+					</select> -->
 				</td>
 				<td align="right">
-					<button type="button" class="am-btn am-btn-warning am-round"><i class="am-icon-cog"></i> 确认基码</button><br/><br/>
-					<button type="button" class="am-btn am-btn-danger am-round"><i class="am-icon-cog"></i> 清空基码</button>
+					<button type="button" id="saveBtn" class="am-btn am-btn-warning am-round"><i class="am-icon-cog"></i> 确　　认</button><br/><br/>
+					<button type="button" id="emptyBase" class="am-btn am-btn-danger am-round"><i class="am-icon-cog"></i> 清空基码</button>
 				</td>
 			</tr>
 		</table>
 	</div>
 </body>
+<script type="text/javascript" src="<%=basePath %>/js/md5_utf8.js"></script>
+<script type="text/javascript" src="<%=basePath %>/jsp/view/js/roulette.js"></script>
 </html>

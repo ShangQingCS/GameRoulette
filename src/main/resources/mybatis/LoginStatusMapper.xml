@@ -81,7 +81,7 @@
         DEMOID = #{demoid,jdbcType=VARCHAR},
       </if>
       <if test="updatetime != null">
-        updatetime = #{updatetime,jdbcType=VARCHAR},
+        updatetime = #{updatetime,jdbcType=TIMESTAMP,typeHandler=cn.sqhl.shop.core.DateTypeHandler}
       </if>
     </set>
     where ID = #{id,jdbcType=VARCHAR}
@@ -92,7 +92,7 @@
       USERID = #{userid,jdbcType=VARCHAR},
       HMANID = #{hmanid,jdbcType=VARCHAR},
       DEMOID = #{demoid,jdbcType=VARCHAR},
-      updatetime = #{updatetime,jdbcType=VARCHAR}
+      updatetime = #{updatetime,jdbcType=TIMESTAMP,typeHandler=cn.sqhl.shop.core.DateTypeHandler}
     where ID = #{id,jdbcType=VARCHAR}
   </update>
   
@@ -105,14 +105,24 @@
     <if test="map.sessionid != null">
     	and SESSIONID=#{map.sessionid,jdbcType=VARCHAR}
     </if>
-    <if test="map.userid != null">
+    <if test="map.sessionid == null">
+    	<if test="map.userid != null">
     	and USERID=#{map.userid,jdbcType=VARCHAR}
-    </if>
-    <if test="map.hmanid != null">
-    	and HMANID=#{map.hmanid,jdbcType=VARCHAR}
-    </if>
-    <if test="map.demoid != null">
-    	and DEMOID=#{map.demoid,jdbcType=VARCHAR}
+	    </if>
+	    <if test="map.hmanid == null and map.demoid == null">
+	    	and HMANID is null and DEMOID is null
+	    </if>
+	    
+	    <if test="map.hmanid == null and map.userid == null">
+	    	and HMANID is null and USERID is null
+	    </if>
+	    
+	    <if test="map.hmanid != null">
+	    	and HMANID=#{map.hmanid,jdbcType=VARCHAR}
+	    </if>
+	    <if test="map.demoid != null">
+	    	and DEMOID=#{map.demoid,jdbcType=VARCHAR}
+	    </if>
     </if>
   </select>
 </mapper>

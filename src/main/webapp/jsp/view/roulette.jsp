@@ -1,7 +1,11 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort(); %>
 <html>
 <head>
+<script type="text/javascript">
+	var path_="<%=basePath%>";
+</script>
 <jsp:include page="/include/common.jsp"></jsp:include>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title></title>
@@ -329,6 +333,6 @@ body {
 		</table>
 	</div>
 </body>
-<script type="text/javascript" src="${path}/js/md5_utf8.js"></script>
-<script type="text/javascript" src="${path}/view/js/roulette.js"></script>
+<script type="text/javascript" src="<%=basePath %>/js/md5_utf8.js"></script>
+<script type="text/javascript" src="<%=basePath %>/jsp/view/js/roulette.js"></script>
 </html>

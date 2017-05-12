@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -52,6 +53,12 @@ public class Checkfilter extends OncePerRequestFilter {
 		// TODO Auto-generated method stub
 		String path = request.getRequestURI();
 		HttpSession session = request.getSession();
+		
+//		response.setHeader("SET-COOKIE", "JSESSIONID=" + request.getSession().getId() + ";");
+//		Cookie[] cookies = request.getCookies();
+//		cookies[0].setHttpOnly(false);
+//		response.addCookie(cookies[0]);
+//		
 		try{
 		if (urllist.contains(path)) {// 是否符合check 内容
 			LoginStatus lstatus = loginService.querySession(session.getId());

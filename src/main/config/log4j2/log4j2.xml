@@ -58,7 +58,7 @@
 
 	<Loggers>
 		<!-- 第三方的软件日志级别 -->
-			<logger name="org.springframework" level="info" additivity="true">
+			<logger name="org.springframework" level="debug" additivity="true">
 				<AppenderRef ref="warnLog" />
 				<AppenderRef ref="errorLog" />
 			</logger>
@@ -67,8 +67,8 @@
 				additivity="true">
 				<AppenderRef ref="Console" />
 			</logger>
-			<logger name="cn.sqhl.neig.pointsmanager.mapper" level="debug"
-				additivity="false">
+			<logger name="cn.sqhl.shop.mapper" level="debug"
+				additivity="true">
 				<AppenderRef ref="Console" />
 			</logger>
 

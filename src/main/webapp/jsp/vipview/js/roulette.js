@@ -92,9 +92,9 @@ $("#saveBtn").click(function(){
 	$(".castSmall").text("￥0");
 	$(".castBig").text("￥0");
 	$(".castIn").text("￥0");
-	var basic="betAmount="+isbase+"&lotteryNumber="+number+"&type=0";
+	var basic="betAmount="+isbase+"&lotteryNumber="+number+"&type=1";
 	var sign=getsign(basic);
-	var data={"betAmount":isbase,"lotteryNumber":number,"sign":sign,"sign_type":"MD5","sign_charset":"UTF-8","type":"0"}
+	var data={"betAmount":isbase,"lotteryNumber":number,"sign":sign,"sign_type":"MD5","sign_charset":"UTF-8","type":"1"}
 	$.ajax({
 		url :path_ +"/index/getnext.do",
 		type : 'POST',

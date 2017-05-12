@@ -18,6 +18,7 @@ import cn.sqhl.shop.mapper.HatchetManMapper;
 import cn.sqhl.shop.mapper.LoginStatusMapper;
 import cn.sqhl.shop.mapper.UserMapper;
 import cn.sqhl.shop.service.LoginService;
+import cn.sqhl.shop.utils.DateHelper;
 import cn.sqhl.shop.utils.MD5Util;
 import cn.sqhl.shop.vo.BatchGeneration;
 import cn.sqhl.shop.vo.GameDemo;
@@ -125,6 +126,7 @@ public class LoginServiceImpl implements LoginService{
 		int i=0;
 		if(lstatus!=null){//有记录更新 seesionId
 			newstatus.setId(lstatus.getId());
+			newstatus.setUpdatetime(DateHelper.getCurrTimeByPattern("yyyy-MM-dd hh:mm:ss"));
 			i=loginStatusMapper.updateByPrimaryKeySelective(newstatus);
 		}else{//没记录insert 记录
 			i=loginStatusMapper.insertSelective(newstatus);

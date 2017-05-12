@@ -199,7 +199,7 @@ function md5(string) {
 
 function getsign(text){
 	text=text+getSessionId();
-	return hex_md5(text);
+	return md5(text);
 }
 
 function getSignVeryfy(json){
