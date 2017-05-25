@@ -6,7 +6,6 @@
 <script type="text/javascript">
 	var path_="<%=basePath%>";
 </script>
-    	<jsp:include page="/include/common.jsp"></jsp:include>
         <meta charset="utf-8">
         <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
         <meta name="format-detection" content="telephone=no">

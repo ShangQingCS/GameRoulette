@@ -40,7 +40,7 @@ $("#saveBtn").click(function(){
 	var sign=getsign(basic);
 	var data={"betAmount":isbase,"lotteryNumber":number,"sign":sign,"sign_type":"MD5","sign_charset":"UTF-8","type":"2"}
 	$.ajax({
-		url :path_ +"/idnex/getnext.do",
+		url :path_ +"/index/getnext.do",
 		type : 'POST',
 		data : data,
 		dataType: "json",

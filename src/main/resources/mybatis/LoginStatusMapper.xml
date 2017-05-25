@@ -102,26 +102,58 @@
     <include refid="Base_Column_List" />
     from GAME_LOGIN_STATUS
     where 1=1
-    <if test="map.sessionid != null">
-    	and SESSIONID=#{map.sessionid,jdbcType=VARCHAR}
+    <if test="map.type !=null">
+    	<if test="map.sessionid != null">
+	    	and SESSIONID=#{map.sessionid,jdbcType=VARCHAR}
+	    </if>
+	     <if test="map.type == 0">
+	     	 <if test="map.demoid != null">
+		    	and DEMOID=#{map.demoid,jdbcType=VARCHAR}
+		    </if>
+		     <if test="map.hmanid == null and map.userid == null">
+		    	and HMANID is null and USERID is null
+		    </if>
+	     </if>
+	     <if test="map.type == 1">
+	     	<if test="map.userid != null">
+	    		and USERID=#{map.userid,jdbcType=VARCHAR}
+		    </if>
+		     <if test="map.hmanid == null and map.demoid == null">
+		    	and HMANID is null and DEMOID is null
+		    </if>
+	     </if>
+	     <if test="map.type == 2">
+	     	<if test="map.userid != null">
+	    		and USERID=#{map.userid,jdbcType=VARCHAR}
+		    </if>
+		     <if test="map.hmanid != null">
+		    	and HMANID=#{map.hmanid,jdbcType=VARCHAR}
+		    </if>
+	     </if>
+    
     </if>
-    <if test="map.sessionid == null">
-    	<if test="map.userid != null">
-    	and USERID=#{map.userid,jdbcType=VARCHAR}
+    <if test="map.type ==null">
+    	<if test="map.sessionid != null">
+	    	and SESSIONID=#{map.sessionid,jdbcType=VARCHAR}
 	    </if>
-	    <if test="map.hmanid == null and map.demoid == null">
-	    	and HMANID is null and DEMOID is null
-	    </if>
-	    
-	    <if test="map.hmanid == null and map.userid == null">
-	    	and HMANID is null and USERID is null
-	    </if>
-	    
-	    <if test="map.hmanid != null">
-	    	and HMANID=#{map.hmanid,jdbcType=VARCHAR}
-	    </if>
-	    <if test="map.demoid != null">
-	    	and DEMOID=#{map.demoid,jdbcType=VARCHAR}
+	    <if test="map.sessionid == null">
+	    	<if test="map.userid != null">
+	    		and USERID=#{map.userid,jdbcType=VARCHAR}
+		    </if>
+		    <if test="map.hmanid == null and map.demoid == null">
+		    	and HMANID is null and DEMOID is null
+		    </if>
+		    
+		    <if test="map.hmanid == null and map.userid == null">
+		    	and HMANID is null and USERID is null
+		    </if>
+		    
+		    <if test="map.hmanid != null">
+		    	and HMANID=#{map.hmanid,jdbcType=VARCHAR}
+		    </if>
+		    <if test="map.demoid != null">
+		    	and DEMOID=#{map.demoid,jdbcType=VARCHAR}
+		    </if>
 	    </if>
     </if>
   </select>

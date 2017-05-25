@@ -1,6 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<% String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort(); %>
+<%String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort(); %>
 <html>
 <head>
 <script type="text/javascript">
@@ -241,7 +241,7 @@ body {
 				<td>
 					<table class="small">
 						<tr>
-							<td><a href="#" onclick='checkNumber(17)'><span class="am-badge am-badge-danger am-round">27</span></a></td>
+							<td><a href="#" onclick='checkNumber(27)'><span class="am-badge am-badge-danger am-round">27</span></a></td>
 							<td><a href="#" onclick='checkNumber(30)'><span class="am-badge am-badge-danger am-round">30</span></a></td>
 							<td><a href="#" onclick='checkNumber(33)'><span class="am-badge am-badge-black am-round">33</span></a></td>
 							<td><a href="#" onclick='checkNumber(36)'><span class="am-badge am-badge-danger am-round">36</span></a></td>

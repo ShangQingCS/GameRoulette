@@ -93,7 +93,7 @@ public class LoginServiceImpl implements LoginService{
 
 	@Transactional
 	@Override
-	public LoginStatus updateSession(String username, String hname,String demoname, String sessionid) {
+	public LoginStatus updateSession(String username, String hname,String demoname, String sessionid,String type) {
 		Map map=new HashMap();
 		LoginStatus newstatus=new LoginStatus();
 		
@@ -115,6 +115,11 @@ public class LoginServiceImpl implements LoginService{
 			newstatus.setDemoid(demoname);
 			bg.setUserid(demoname);
 		}
+		
+		if(StringUtils.isNotEmpty(type)){
+			map.put("type",type);
+		}
+		
 		//在记录中查找是否有对应的记录
 		LoginStatus lstatus=loginStatusMapper.queryStatus(map);
 		

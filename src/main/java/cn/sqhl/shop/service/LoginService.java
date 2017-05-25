@@ -11,7 +11,7 @@ public interface LoginService {
 	public User AuthenticationUser(String username,String password);
 	public GameDemo AuthenticationGameDemo(String username, String password);
 	public HatchetMan AuthenticationHatchetMan(String username,String vipusername);
-	public LoginStatus updateSession(String username, String vipusername,String demoname, String sessionid);
+	public LoginStatus updateSession(String username, String vipusername,String demoname, String sessionid,String type);
 	public LoginStatus querySession(String sessionid);
 	public LoginStatus getSession(Map map);
 }

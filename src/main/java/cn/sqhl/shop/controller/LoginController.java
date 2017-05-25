@@ -100,7 +100,7 @@ public class LoginController {
 		}
 		try {
 			if (valid) {// 存在用户
-				LoginStatus loginstatus = loginService.updateSession(uname, ename, dname, request.getSession().getId());
+				LoginStatus loginstatus = loginService.updateSession(uname, ename, dname, request.getSession().getId(),type);
 				if (loginstatus == null) {
 					jsobj.put("result", "0");
 					jsobj.put("message", "存储出错！请重新尝试登陆");
